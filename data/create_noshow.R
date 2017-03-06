@@ -8,3 +8,7 @@ library(stringr)
 
 ns <- read.csv("~/IODS-final/data/No-show-Issue-Comma-300k.csv", stringsAsFactors = FALSE)
 str(ns)
+
+#Variables like integers and characters are not suitable. We need to change the variables as follows
+ns$Gender <- factor(ns$Gender, c("M", "F")) 
+str(ns)
