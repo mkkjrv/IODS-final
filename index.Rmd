@@ -1,8 +1,21 @@
 ---
-title: "index"
-author: "Mikko"
-date: "1 3 2017"
-output: html_document
+title: "IODS final"
+output: 
+  html_document:
+    author: "Mikko Järvi"
+    theme: sandstone
+    toc: true
+    toc_depth: 2
+    fig_caption: true
+    fig_width: 7
+    fig_height: 6
+    code_folding: hide
 ---
 
-This is the index file of the final assignment.
+***
+  
+```{r child = "chapter1.Rmd"}
+```
+  
+***
+  
