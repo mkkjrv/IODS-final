@@ -138,15 +138,71 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#chapter-1-introduction-to-data">Chapter 1: Introduction to data</a></li>
+<li><a href="#chapter-1-introduction-to-data">Chapter 1: Introduction to data</a><ul>
+<li><a href="#overview-of-data">Overview of data</a></li>
+</ul></li>
 </ul>
 </div>
 
 <hr />
 <div id="chapter-1-introduction-to-data" class="section level1">
 <h1>Chapter 1: Introduction to data</h1>
-<p>This is a analysis of</p>
+<p>This is a analysis of EDA Medical Apppointment No-show data. Data is from <a href="https://www.kaggle.com/joniarroba/noshowappointments">Kaggle</a>. First we are going to have a good overview of the data and then we are going to predict show-ups and no-shows with some statistical modelling.</p>
+<p>This analysis is the final assignment of the IODS course. You can find the <a href="https://github.com/mkkjrv/IODS-final">GitHub repository here.</a></p>
+<div id="overview-of-data" class="section level2">
+<h2>Overview of data</h2>
+<p>After cleaning the the original dataset there is 15 variables and 300 000 observations. All the variables were characters in the original dataset. For the analysis the variables were converted as follows.</p>
+<pre><code>## Warning: All formats failed to parse. No formats found.</code></pre>
+<pre><code>## 'data.frame':    300000 obs. of  15 variables:
+##  $ Age                    : int  19 24 4 5 38 5 46 4 20 51 ...
+##  $ Gender                 : Factor w/ 2 levels &quot;F&quot;,&quot;M&quot;: 2 1 1 2 2 1 1 1 1 1 ...
+##  $ AppointmentRegistration: POSIXct, format: &quot;2014-12-16 14:46:25&quot; &quot;2015-08-18 07:01:26&quot; ...
+##  $ ApointmentData         : POSIXct, format: NA NA ...
+##  $ DayOfTheWeek           : Factor w/ 7 levels &quot;Friday&quot;,&quot;Monday&quot;,..: 7 7 6 5 6 6 6 1 6 6 ...
+##  $ Status                 : Factor w/ 2 levels &quot;No.Show&quot;,&quot;Show.Up&quot;: 2 2 2 2 2 1 2 2 2 2 ...
+##  $ Diabetes               : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Alcoolism              : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ HiperTension           : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Handcap                : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Smokes                 : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Scholarship            : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Tuberculosis           : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ Sms_Reminder           : logi  FALSE FALSE FALSE TRUE TRUE TRUE ...
+##  $ AwaitingTime           : int  29 1 1 15 6 35 18 14 14 4 ...</code></pre>
+<pre><code>##       Age         Gender     AppointmentRegistration      
+##  Min.   :  0.00   F:200505   Min.   :2013-05-29 15:14:11  
+##  1st Qu.: 19.00   M: 99495   1st Qu.:2014-06-24 07:45:05  
+##  Median : 38.00              Median :2014-12-03 15:35:36  
+##  Mean   : 37.81              Mean   :2014-12-15 04:43:13  
+##  3rd Qu.: 56.00              3rd Qu.:2015-06-11 09:06:08  
+##  Max.   :113.00              Max.   :2015-12-29 12:08:58  
+##                                                           
+##  ApointmentData      DayOfTheWeek       Status        Diabetes      
+##  Min.   :NA       Friday   :52771   No.Show: 90731   Mode :logical  
+##  1st Qu.:NA       Monday   :59298   Show.Up:209269   FALSE:276610   
+##  Median :NA       Saturday : 1393                    TRUE :23390    
+##  Mean   :NA       Sunday   :    6                    NA's :0        
+##  3rd Qu.:NA       Thursday :60262                                   
+##  Max.   :NA       Tuesday  :62775                                   
+##  NA's   :300000   Wednesday:63495                                   
+##  Alcoolism       HiperTension     Handcap          Smokes       
+##  Mode :logical   Mode :logical   Mode :logical   Mode :logical  
+##  FALSE:292497    FALSE:235233    FALSE:294403    FALSE:284289   
+##  TRUE :7503      TRUE :64767     TRUE :5597      TRUE :15711    
+##  NA's :0         NA's :0         NA's :0         NA's :0        
+##                                                                 
+##                                                                 
+##                                                                 
+##  Scholarship     Tuberculosis    Sms_Reminder     AwaitingTime   
+##  Mode :logical   Mode :logical   Mode :logical   Min.   :  1.00  
+##  FALSE:270931    FALSE:299865    FALSE:128547    1st Qu.:  4.00  
+##  TRUE :29069     TRUE :135       TRUE :171453    Median :  8.00  
+##  NA's :0         NA's :0         NA's :0         Mean   : 13.84  
+##                                                  3rd Qu.: 20.00  
+##                                                  Max.   :398.00  
+## </code></pre>
 <hr />
+</div>
 </div>
 
 

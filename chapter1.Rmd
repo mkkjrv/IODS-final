@@ -4,16 +4,30 @@ This is a analysis of EDA Medical Apppointment No-show data. Data is from [Kaggl
 
 This analysis is the final assignment of the IODS course. You can find the [GitHub repository here.](https://github.com/mkkjrv/IODS-final)
 
+```{r, include = FALSE}
+library(ggplot2)
+library(GGally)
+library(lubridate)
+```
+
 ##Overview of data##
 
 After cleaning the the original dataset there is 15 variables and 300 000 observations. All the variables were characters in the original dataset. For the analysis the variables were converted as follows.
 
-```{r}
+```{r, echo = F}
 noshow <- read.csv("data/noshow.csv", header = TRUE)
 noshow <- dplyr::select(noshow, -X)
+noshow$AppointmentRegistration <- ymd_hms(noshow$AppointmentRegistration)
+noshow$ApointmentData <- ymd_hms(noshow$ApointmentData)
 str(noshow)
+summary(noshow)
 ```
 
+
+
+```{r, echo = FALSE}
+#ggpairs(noshow, mapping = aes(col = Gender, alpha = 0.1), lower = list(combo = #wrap("facethist", bins = 20)))
+``` 
 
 
 
