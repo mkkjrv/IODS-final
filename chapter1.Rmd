@@ -1,3 +1,20 @@
 #Chapter 1: Introduction to data
 
-This is a analysis of 
+This is a analysis of EDA Medical Apppointment No-show data. Data is from [Kaggle](https://www.kaggle.com/joniarroba/noshowappointments). First we are going to have a good overview of the data and then we are going to predict show-ups and no-shows with some statistical modelling.
+
+This analysis is the final assignment of the IODS course. You can find the [GitHub repository here.](https://github.com/mkkjrv/IODS-final)
+
+##Overview of data##
+
+After cleaning the the original dataset there is 15 variables and 300 000 observations. All the variables were characters in the original dataset. For the analysis the variables were converted as follows.
+
+```{r}
+noshow <- read.csv("data/noshow.csv", header = TRUE)
+noshow <- dplyr::select(noshow, -X)
+str(noshow)
+```
+
+
+
+
+
