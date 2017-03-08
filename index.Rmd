@@ -1,8 +1,9 @@
 ---
 title: "IODS final"
+author: "Mikko Järvi, mikko.jarvi(at)helsinki.fi"
+date: "8.3.2017"
 output: 
   html_document:
-    author: "Mikko Järvi"
     theme: sandstone
     toc: true
     toc_depth: 2
