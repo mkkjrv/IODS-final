@@ -38,16 +38,34 @@ ns$Age <- abs(ns$Age)
 #we think also that waiting time as a positive value 
 range(ns$AwaitingTime)
 ns$AwaitingTime <- abs(ns$AwaitingTime)
-summary(ns)
-str(ns)
-dim(ns)
+
+#extracting time stamps (registration) to year, month, day, weekday
+ns <- mutate(ns, RegYear = factor(format(ns$AppointmentRegistration,'%Y')))
+ns <- mutate(ns, RegMonth = factor(format(ns$AppointmentRegistration,'%m')))
+ns <- mutate(ns, RegDay = factor(format(ns$AppointmentRegistration,'%d')))
+ns <- mutate(ns, RegWeekDay = factor(format(ns$AppointmentRegistration, '%A')))
+                                           
+#extracting time stamps (appointment) to year, month, day, weekday, hour
+ns <- mutate(ns, AppYear = factor(format(ns$ApointmentData,'%Y')))
+ns <- mutate(ns, AppMonth = factor(format(ns$ApointmentData,'%m')))
+ns <- mutate(ns, AppDay = factor(format(ns$ApointmentData,'%d')))
+ns <- mutate(ns, AppWeekDay = factor(format(ns$ApointmentData, '%A')))
+
+#cleaning names of columns
+colnames(ns)[4] <- "AppointmentData"
+colnames(ns)[8] <- "Alcoholism"
+colnames(ns)[9] <- "HipTension"
+colnames(ns)[10] <- "Handicap"
+colnames(ns)[15] <- "WaitingTimeDays"
 
 ##check working directory and save the "noshow.txt" to the data folder
 getwd()
-ns <- as.data.frame(ns)
-glimpse(ns)
-write.csv(ns, file="noshow.csv")
+summary(ns)
+str(ns)
+dim(ns)
+write.table(ns, file="noshow.txt", sep = "\t")
 
-#sometable <- read.csv("~/IODS-final/data/noshow.csv", header = TRUE)
+#checking that export was appropriate
+#sometable <- read.table("noshow.txt", header = TRUE, sep = "\t")
 #str(sometable)
 

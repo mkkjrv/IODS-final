@@ -14,21 +14,30 @@ library(lubridate)
 
 After cleaning the the original dataset there is 15 variables and 300 000 observations. All the variables were characters in the original dataset. For the analysis the variables were converted as follows. Script for the data wrangling is [here.](https://github.com/mkkjrv/IODS-final/blob/master/data/create_noshow.R)
 
-```{r, echo = F}
-noshow <- read.csv("data/noshow.csv", header = TRUE)
-noshow <- dplyr::select(noshow, -X)
-noshow$AppointmentRegistration <- ymd_hms(noshow$AppointmentRegistration)
-noshow$ApointmentData <- ymd_hms(noshow$ApointmentData)
+```{r, echo = FALSE}
+noshow <- read.table("data/noshow.txt", header = TRUE, sep = "\t")
+noshow$AppointmentRegistration <- date(noshow$AppointmentRegistration)
+noshow$AppointmentData <- date(noshow$AppointmentData)
+noshow$RegYear <- as.factor(noshow$RegYear)
+noshow$RegMonth <- as.factor(noshow$RegMonth)
+noshow$RegDay <- as.factor(noshow$RegDay)
+noshow$AppYear <- as.factor(noshow$AppYear)
+noshow$AppMonth <- as.factor(noshow$AppMonth)
+noshow$AppDay <- as.factor(noshow$AppDay)
 str(noshow)
-summary(noshow)
 ```
 
-
+###Status###
 
 ```{r, echo = FALSE}
-#ggpairs(noshow, mapping = aes(col = Gender, alpha = 0.1), lower = list(combo = #wrap("facethist", bins = 20)))
+ggplot(noshow, aes(x=Status, fill = Status)) + geom_bar()
 ``` 
 
+```{r, echo = FALSE }
+status_table <- table(noshow$Status)
+status_table
+```
+```{r, echo = FALSE}
 
-
+```
 
