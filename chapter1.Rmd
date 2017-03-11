@@ -16,6 +16,8 @@ After cleaning the the original dataset there is 15 variables and 300 000 observ
 
 ```{r, echo = FALSE}
 noshow <- read.table("data/noshow.txt", header = TRUE, sep = "\t")
+noshow$DayOfTheWeek <- factor(noshow$DayOfTheWeek,
+        levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday" , "Saturday", "Sunday"))
 noshow$AppointmentRegistration <- date(noshow$AppointmentRegistration)
 noshow$AppointmentData <- date(noshow$AppointmentData)
 noshow$RegYear <- as.factor(noshow$RegYear)
@@ -27,6 +29,13 @@ noshow$AppDay <- as.factor(noshow$AppDay)
 str(noshow)
 ```
 
+When you look at the variables you could easily divide them for three groups. First group includes basic information about the patient like *age* and *gender*. Second group includes information about the diseases and habits of the patient like *diabetes*, *alcoholism* and wheter patient smokes or not. Third group of variables includes infromation about the time of the registration and the appointment.
+
+###Research question###
+
+In this analysis I'm going to find the factors that influences most on patients no-shows.I'm also going to create statistical model to predict when patient is most likely going to miss the appointment. 
+
+
 ###Status###
 
 ```{r, echo = FALSE}
@@ -37,7 +46,24 @@ ggplot(noshow, aes(x=Status, fill = Status)) + geom_bar()
 status_table <- table(noshow$Status)
 status_table
 ```
-```{r, echo = FALSE}
 
+Propotion of the patients that don't show up is high. Seems that the dataset is not random.
+
+###Sex and age###
+```{r}
+#a boxplot of high_use, sex and age
+g1 <- ggplot(noshow, aes(x = Status, y = Age, col = Gender))
+g1 + geom_boxplot() + ggtitle("Patients by age and sex") + xlab("No-show and show up groups") + ylab("Age of patients")
+```
+
+It seems that the distribution of age is similar in both patient groups and there is no significant difference between males and females.
+
+##No-Shows in time##
+
+```{r, echo = FALSE}
+table_DayOfTheWeek <- table(noshow$Status, noshow$DayOfTheWeek)
+addmargins(table_DayOfTheWeek)
+
+ggplot(noshow, aes(x=DayOfTheWeek, fill=Status )) + geom_bar(position="fill") + xlab("Propotions of patients by weekday")
 ```
 

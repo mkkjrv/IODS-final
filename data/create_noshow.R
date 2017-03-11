@@ -14,9 +14,6 @@ str(ns)
 ns$Gender <- factor(ns$Gender, c("M", "F")) 
 ns$AppointmentRegistration <- ymd_hms(ns$AppointmentRegistration)
 ns$ApointmentData <- ymd_hms(ns$ApointmentData)
-ns$DayOfTheWeek <- factor(ns$DayOfTheWeek,
-                          levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday" , 
-                                     "Saturday", "Sunday"))
 ns$Status <- factor(make.names(ns$Status))
 ns$Diabetes <- as.logical(ns$Diabetes)
 ns$Alcoolism <- as.logical(ns$Alcoolism)
