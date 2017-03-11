@@ -61,9 +61,31 @@ It seems that the distribution of age is similar in both patient groups and ther
 ##No-Shows in time##
 
 ```{r, echo = FALSE}
+table_AppYear <- table(noshow$Status, noshow$AppYear)
+addmargins(table_AppYear)
+
+ggplot(noshow, aes(x=AppYear, fill=Status )) + geom_bar(position="fill") + xlab("Propotions of patients by year")
+```
+
+Propotion of the patient gropus seems to be identical between both years.
+
+
+```{r, echo = FALSE}
+table_AppMonth <- table(noshow$Status, noshow$AppMonth)
+addmargins(table_AppMonth)
+
+ggplot(noshow, aes(x=AppMonth, fill=Status )) + geom_bar(position="fill") + xlab("Propotions of patients by month")
+```
+
+The propotion of patients who do not show up on appointment is steady during months. There seems to be slight trend that at end of the year no-shows are increasing but the effect seesm to be modest.
+
+
+```{r, echo = FALSE}
 table_DayOfTheWeek <- table(noshow$Status, noshow$DayOfTheWeek)
 addmargins(table_DayOfTheWeek)
 
 ggplot(noshow, aes(x=DayOfTheWeek, fill=Status )) + geom_bar(position="fill") + xlab("Propotions of patients by weekday")
 ```
+
+It seems that there is no significant difference in patient groups by weekday. At sundays there seems to be less no-shows but on the other hand there is only 6 patients in two years on sundays.
 
