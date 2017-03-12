@@ -10,6 +10,7 @@ library(GGally)
 library(lubridate)
 library(tidyverse)
 library(gridExtra)
+library(caret)
 ```
 
 ##Overview of data##
@@ -188,6 +189,24 @@ CI <- confint(model) %>% exp
 cbind(OR, CI)
 ```
 
-Odds ratio (OR) and the 95% confidence interval (CI) shows that those patients who have 
+Odds ratio (OR) and the 95% confidence interval (CI) shows that those patients who shuffer from alcoholism are almost 2/3 times more likely to not show on an appointment. Patients with a diabetes are excluded from the model because confidence interval shows that *diabetes* is not statistically significant (because the interval contains 1) and other variables are.
 
+#Part three: Predictions#
 
+```{r, echo = FALSE}
+m_final <- glm(Status ~ Age + WaitingTimeDays + Alcoholism + Scholarship, data = noshow, family = "binomial")
+summary(m_final)
+```
+
+```{r, echo = FALSE}
+#predict and add the answer and the prediction to the data (noshow)
+probabilities <- predict(m_final, type = "response")
+noshow <- mutate(noshow, probability = probabilities)
+noshow <- mutate(noshow, prediction = probabilities > 0.5)
+str(noshow)
+
+#tabulate the target variable versus the prediction
+table("Status" = noshow$Status, "Prediction" = noshow$prediction)
+#confusionMatrix(noshow$prediction, noshow$Status)
+
+```
