@@ -8,6 +8,8 @@ This analysis is the final assignment of the IODS course. You can find the [GitH
 library(ggplot2)
 library(GGally)
 library(lubridate)
+library(tidyverse)
+library(gridExtra)
 ```
 
 ##Overview of data##
@@ -84,8 +86,33 @@ The propotion of patients who do not show up on appointment is steady during mon
 table_DayOfTheWeek <- table(noshow$Status, noshow$DayOfTheWeek)
 addmargins(table_DayOfTheWeek)
 
-ggplot(noshow, aes(x=DayOfTheWeek, fill=Status )) + geom_bar(position="fill") + xlab("Propotions of patients by weekday")
+ggplot(noshow, aes(x=DayOfTheWeek, fill=Status )) + geom_bar( position = "fill") + xlab("Propotions of patients by weekday")
 ```
 
 It seems that there is no significant difference in patient groups by weekday. At sundays there seems to be less no-shows but on the other hand there is only 6 patients in two years on sundays.
+
+##Diseases and habits as binary variables##
+
+```{r, echo = FALSE}
+dia_plot <- ggplot(noshow, aes(Diabetes, fill = Status)) + geom_bar(position = "fill")
+alc_plot <- ggplot(noshow, aes(Alcoholism, fill = Status)) + geom_bar(position = "fill")
+hip_plot <- ggplot(noshow, aes(HipTension, fill = Status)) + geom_bar(position = "fill")
+tube_plot <- ggplot(noshow, aes(Tuberculosis, fill = Status)) + geom_bar(position = "fill")
+grid.arrange(dia_plot, alc_plot, hip_plot, tube_plot, ncol = 2, top = "Deseases as binary variables")
+```
+
+It seems that patients who has deseases like diabetes or hip tensions that require regular visit in hospital tend to be more prone to show up on appointment. Patients who suffer from alcoholism or tuberculosis do not visit hospital on regular basis and maybe therefore they are more prone to have no-shows.
+
+
+```{r, echo = FALSE}
+hand_plot <- ggplot(noshow, aes(Handicap, fill = Status)) + geom_bar(position = "fill")
+smo_plot <- ggplot(noshow, aes(Smokes, fill = Status)) + geom_bar(position = "fill")
+sch_plot <- ggplot(noshow, aes(Scholarship, fill = Status)) + geom_bar(position = "fill")
+sms_plot <- ggplot(noshow, aes(Sms_Reminder, fill = Status)) + geom_bar(position = "fill")
+grid.arrange(hand_plot, smo_plot, sch_plot, sms_plot, ncol = 2, top = "Habits as binary variables")
+```
+
+First glimpse to habits shows that the is no remarkable differences between no-show and show up patients. It suprising that even sms reminder do not make difference among patients at this data set.
+
+
 
