@@ -1,3 +1,15 @@
 #Chapter 2: Analysis of the data
 
-This is the second chapter of the final assignment
+This is the second chapter of the final assignment. In this analysis we are using logistic regression model and trying predict patients who do not show up to appointment. In chapter one we reviewed differend variables against *Status* and find that others have greater variance than others.
+
+After careful consideration we use the following variables in logistic regression model
+
+|variable|description|
+|---------|----------|
+|Age|numeric|
+|WaitingTimeIntervals|factor (1-4 levels)|
+|Alcoholism|factor (true/false)|
+|Diabetes|factor (true/false)|
+|Scholarship|factor (true/false)|
+
+

@@ -91,6 +91,47 @@ ggplot(noshow, aes(x=DayOfTheWeek, fill=Status )) + geom_bar( position = "fill")
 
 It seems that there is no significant difference in patient groups by weekday. At sundays there seems to be less no-shows but on the other hand there is only 6 patients in two years on sundays.
 
+```{r, echo = FALSE}
+w_plot <- ggplot(noshow, aes(x = Status, y = WaitingTimeDays, fill = Status))
+w_plot + geom_boxplot() + ggtitle("Waiting time in days by Status") + xlab("Status group") + ylab("Waiting time in days")
+
+```
+
+It seems that scale of the waiting time is so twisted that it makes the interpretation quite hard.
+
+```{r, echo = FALSE}
+summary(noshow$WaitingTimeDays)
+```
+
+We need to divide the variable into intervals. Quantile points of the variable WaitingTimeDays are: 
+
+```{r, echo = FALSE}
+#making the intervals
+bins <- quantile(noshow$WaitingTimeDays)
+
+wt <- noshow$WaitingTimeDays
+#create a categorical variable 'WaitingTime'
+WaitingTimeIntervals <- cut(wt, breaks = bins, include.lowest = TRUE, label = c("short", "med_short", "med_long", "long"))
+
+#look at the table of the new factor wti
+wti_tab <-table(WaitingTimeIntervals)
+wti_tab
+
+# add the new categorical value to noshow
+noshow <- data.frame(noshow, WaitingTimeIntervals)
+#str(noshow)
+
+```
+
+
+```{r, echo = FALSE}
+ggplot(noshow, aes(WaitingTimeIntervals, fill = Status)) + geom_bar(position = "fill") + ggtitle("Propotion of patients in status groups by waiting time")
+
+```
+
+It seems that the propotion of the no-shows is getting higher when the waiting time is growing.
+
+
 ##Diseases and habits as binary variables##
 
 ```{r, echo = FALSE}
